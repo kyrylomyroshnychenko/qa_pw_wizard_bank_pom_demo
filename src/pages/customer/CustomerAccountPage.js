@@ -42,6 +42,16 @@ export class CustomerAccountPage {
     await expect(this.accountDataLine).toContainText(text);
   }
 
+async getBalanceValue() {
+  const balanceText = await this.page.getByText(/Balance :/).locator('strong').nth(1).textContent();
+  return balanceText.toString();
+}
+
+async assertBalanceEquals(amount) {
+  const balanceValue = await this.getBalanceValue();
+  expect(balanceValue).toBe(amount);
+}
+
   async clickDepositButton() {
     await this.depositButton.click();
   }
