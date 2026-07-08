@@ -3,13 +3,13 @@ import { expect } from '@playwright/test';
 export class OpenAccountPage {
   constructor(page) {
     this.page = page;
+    this.customerSelect = page.getByTestId('userSelect');
     this.currencySelect = page.getByTestId('currency');
+    this.processButton = page.getByRole('button', { name: 'Process' });
   }
 
   async open() {
-    await this.page.goto(
-      '/angularJs-protractor/BankingProject/#/manager/openAccount',
-    );
+    await this.page.goto('/angularJs-protractor/BankingProject/#/manager/openAccount');
   }
 
   async reload() {
@@ -17,41 +17,20 @@ export class OpenAccountPage {
   }
 
   async selectCustomer(firstName, lastName) {
-  const fullName = `${firstName} ${lastName}`;
-  await this.page.getByTestId('userSelect').selectOption({ label: fullName });
+    const fullName = `${firstName} ${lastName}`;
+    await this.customerSelect.selectOption({ label: fullName });
   }
 
-  async selectCurrencyDollar() {
-    await this.currencySelect.selectOption({ label: 'Dollar' });
+  async selectCurrency(currency) {
+    await this.currencySelect.selectOption({ label: currency });
   }
 
-  async selectCurrencyPound() {
-    await this.currencySelect.selectOption({ label: 'Pound' });
-  }
-
-  async selectCurrencyRupee() {
-    await this.currencySelect.selectOption({ label: 'Rupee' });
-  }
-
-  async assertCurrencyIsDollar() {
+  async assertCurrencyIs(expectedCurrency) {
     const selectedOption = this.currencySelect.locator('option:checked');
-    await expect(selectedOption).toHaveText('Dollar');
-  }
-
-  async assertCurrencyIsPound() {
-    const selectedOption = this.currencySelect.locator('option:checked');
-    await expect(selectedOption).toHaveText('Pound');
-  }
-
-  async assertCurrencyIsRupee() {
-    const selectedOption = this.currencySelect.locator('option:checked');
-    await expect(selectedOption).toHaveText('Rupee');
+    await expect(selectedOption).toHaveText(expectedCurrency);
   }
 
   async process() {
-    await this.page.getByRole('button', { name: 'Process' }).click();
+    await this.processButton.click();
   }
-
-
-
 }

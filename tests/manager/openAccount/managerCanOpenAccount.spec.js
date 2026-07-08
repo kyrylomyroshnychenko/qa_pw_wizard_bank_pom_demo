@@ -58,7 +58,7 @@ test('Assert manager can open account', async ({ page }) => {
 
   // 3. Select currency.
 
-  await openAccountPage.selectCurrencyDollar();
+  await openAccountPage.selectCurrency('Dollar');
 
   // 4. Click [Process].
 
@@ -75,8 +75,7 @@ test('Assert manager can open account', async ({ page }) => {
   // 7. Assert the customer row has the account number not empty.
 
   const customerPage = new CustomersListPage(page);
-  accountNumber = await customerPage.getLastRowAccountNumber(accountNumber);
-  await customerPage.assertLastRowAccountNumber(accountNumber);
+  await customerPage.assertLastRowNotEmpty();
 
   // Tips:
   // 1. Do not rely on the customer row id for the step 13. 

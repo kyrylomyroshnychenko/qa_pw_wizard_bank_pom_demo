@@ -27,7 +27,8 @@ await customerLoginPage.selectCustomer('Harry Potter');
 
   // 5. Fill deposit value
 
-  const amount = faker.number.int(100).toString();
+  const initialBalance = await accountPage.getBalanceValue(); // initial deposit value
+  const amount = faker.number.int(100);
   await accountPage.fillAmountInputField(amount);
 
   // 6. Click [Deposit]
@@ -40,7 +41,7 @@ await customerLoginPage.selectCustomer('Harry Potter');
   
   // 8. Assert Balance
 
-  await accountPage.assertBalanceEquals(amount);
+  await accountPage.assertBalanceAfterDeposit(initialBalance, amount);
 
   // 9. Click [Transactions]
 

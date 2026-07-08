@@ -13,26 +13,26 @@ test('Assert manager can choose currencies for account', async ({ page }) => {
   // 2. Select currency Dollar
 
     
-    await openAccount.selectCurrencyDollar();
+    await openAccount.selectCurrency('Dollar');
 
   // 3. Assert the drop-down has value Dollar
 
-    await openAccount.assertCurrencyIsDollar('Dollar'); 
+    await openAccount.assertCurrencyIs('Dollar'); 
 
   // 4. Select currency Pound
 
-    await openAccount.selectCurrencyPound();
+    await openAccount.selectCurrency('Pound');
 
   // 5. Assert the drop-down has value Pound
 
-    await openAccount.assertCurrencyIsPound('Pound');
+    await openAccount.assertCurrencyIs('Pound');
 
   // 6. Select currency Rupee
 
-    await openAccount.selectCurrencyRupee();
+    await openAccount.selectCurrency('Rupee');
 
   // 7. Assert the drop-down has value Rupee
 
-    await openAccount.assertCurrencyIsRupee('Rupee');
+    await openAccount.assertCurrencyIs('Rupee');
   //
 });

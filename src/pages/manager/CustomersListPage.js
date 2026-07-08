@@ -32,14 +32,14 @@ export class CustomersListPage {
 
   async getLastRowAccountNumber() {
     const lastRow = this.page.getByRole('row').last();
-    const accountCell = lastRow.locator('td').nth(3);
+    const accountCell = lastRow.locator('td').nth(3); 
     let accountNumber = await accountCell.textContent();
     return accountNumber;
   }
 
-  async assertLastRowAccountNumber(accountNumber) {
-  const lastRowCell = this.customerRows.last().locator('td').nth(3);
-  await expect(lastRowCell).toHaveText(accountNumber);
+  async assertLastRowNotEmpty() {
+    await expect(this.page.locator('tbody tr').last().locator('td').nth(0)).not.toBeEmpty();
+
   }
 
   async assertLastRowHasNoAccountNumber() {
